@@ -176,7 +176,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 /*======================== Parent style ==========================*/
 .input-text {
   display: flex;
@@ -245,8 +245,8 @@ onMounted(() => {
 
 .input-text .input::placeholder {
   color: rgb(192, 192, 192);
-  // font-size: var(--font-size);
-  // font-weight: 300;
+  /* font-size: var(--font-size);
+  font-weight: 300; */
 }
 /* .input:not([type='color']):not([type='range']):not([type='date']):not([type='time']) {
     padding: 0.4rem 0.7rem;
@@ -324,7 +324,7 @@ onMounted(() => {
   top: calc((100% - var(--font-size)) / 2);
   left: 100%;
   transition: all 0.25s;
-  // z-index: 1;
+  /* z-index: 1; */
   padding-left: var(--padding-x);
   color: rgb(192, 192, 192);
   font-size: var(--font-size);
@@ -338,7 +338,7 @@ onMounted(() => {
   top: var(--fl-height);
   padding-left: 0px;
   font-size: var(--fl-size);
-  // transform: translate(0px, var(--fl-height));
+  /* transform: translate(0px, var(--fl-height)); */
   left: 0%;
   color: rgb(134, 134, 134);
 }
