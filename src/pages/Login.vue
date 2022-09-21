@@ -30,7 +30,7 @@ function handleSubmit() {
 
 <template>
   <AuthLayout>
-    <div class="mt-5 ta-center">
+    <div class="ta-center">
       <img src="/img/logo.png" alt="" />
     </div>
 
