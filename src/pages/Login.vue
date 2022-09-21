@@ -8,8 +8,8 @@ import authService from "../services/authService";
 import { handleError, handleSuccess } from "../utils/globalFunctions";
 
 const formData = reactive({ email: "", password: "" });
-
 const loggingIn = ref(false);
+const showPassword = ref(false);
 
 function handleSubmit() {
   console.log(formData);
@@ -25,6 +25,10 @@ function handleSubmit() {
     .finally(() => {
       loggingIn.value = false;
     });
+}
+
+function toggleShowHide() {
+  showPassword.value = !showPassword.value;
 }
 </script>
 
@@ -45,10 +49,17 @@ function handleSubmit() {
           required
         ></InputText>
         <InputText
+          :type="showPassword ? 'text' : 'password'"
           class="mt-3"
           placeholder="Password"
           v-model="formData.password"
-        ></InputText>
+        >
+          <template #append>
+            <div class="show-hide c-pointer" @click="toggleShowHide">
+              {{ showPassword ? "HIDE" : "SHOW" }}
+            </div>
+          </template>
+        </InputText>
         <div class="ta-right mt-3">
           <router-link to="#">Forget Password?</router-link>
         </div>
@@ -66,3 +77,13 @@ function handleSubmit() {
     </AuthCard>
   </AuthLayout>
 </template>
+
+<style scoped>
+.show-hide {
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 16px;
+  color: #909090;
+}
+</style>
