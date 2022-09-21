@@ -2,7 +2,7 @@
   <button
     :class="classes"
     :type="type"
-    :disabled="disabled"
+    :disabled="disabled || loading"
     @click="handleClick"
   >
     <slot> </slot>
@@ -229,7 +229,7 @@ function handleClick() {
 
 .btn:disabled {
   opacity: 0.5;
-  /* pointer-events: none; */
+  pointer-events: none;
   cursor: not-allowed;
 }
 .btn-group {

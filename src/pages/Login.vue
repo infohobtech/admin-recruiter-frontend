@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
-
 import AuthLayout from "../layouts/AuthLayout.vue";
 import AuthCard from "../components/cards/AuthCard.vue";
 import InputText from "../components/inputs/InputText.vue";
 import Button from "../components/inputs/Button.vue";
+import authService from "../services/authService";
+import { handleError, handleSuccess } from "../utils/globalFunctions";
 
 const formData = reactive({ email: "", password: "" });
 
@@ -13,6 +14,17 @@ const loggingIn = ref(false);
 function handleSubmit() {
   console.log(formData);
   loggingIn.value = true;
+  authService
+    .login(formData)
+    .then((res) => {
+      handleSuccess(res);
+    })
+    .catch((e) => {
+      handleError(e);
+    })
+    .finally(() => {
+      loggingIn.value = false;
+    });
 }
 </script>
 

@@ -21,5 +21,6 @@
 
 .auth__container {
   width: 545px;
+  margin: auto;
 }
 </style>
