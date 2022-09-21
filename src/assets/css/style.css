@@ -109,21 +109,33 @@
   --ac-rose-900: hsl(341.5 75.5% 30.4%);
   --ac-rose-950: hsl(341.3 70.1% 17.1%);
 
-  /* theme */
-  --ac-theme-50: var(--ac-primary-50);
-  --ac-theme-100: var(--ac-primary-100);
-  --ac-theme-200: var(--ac-primary-200);
-  --ac-theme-300: var(--ac-primary-300);
-  --ac-theme-400: var(--ac-primary-400);
-  --ac-theme-500: var(--ac-primary-500);
-  --ac-theme-600: var(--ac-primary-600);
-  --ac-theme-700: var(--ac-primary-700);
-  --ac-theme-800: var(--ac-primary-800);
-  --ac-theme-900: var(--ac-primary-900);
-  --ac-theme-950: var(--ac-primary-950);
+  /* Sky */
+  --ac-infohob-50: hsl(204 100% 97.1%);
+  --ac-infohob-100: hsl(204 93.8% 93.7%);
+  --ac-infohob-200: hsl(200.6 94.4% 86.1%);
+  --ac-infohob-300: hsl(199.4 95.5% 73.9%);
+  --ac-infohob-400: hsl(198.4 93.2% 59.6%);
+  --ac-infohob-500: hsl(198.6 88.7% 48.4%);
+  --ac-infohob-600: hsl(200 75% 51%);
+  --ac-infohob-700: hsl(201.3 96.3% 32.2%);
+  --ac-infohob-800: hsl(201 90% 27.5%);
+  --ac-infohob-900: hsl(202 80.3% 23.9%);
+  --ac-infohob-950: hsl(202.3 73.8% 16.5%);
 
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  /* theme */
+  --ac-theme-50: var(--ac-infohob-50);
+  --ac-theme-100: var(--ac-infohob-100);
+  --ac-theme-200: var(--ac-infohob-200);
+  --ac-theme-300: var(--ac-infohob-300);
+  --ac-theme-400: var(--ac-infohob-400);
+  --ac-theme-500: var(--ac-infohob-500);
+  --ac-theme-600: var(--ac-infohob-600);
+  --ac-theme-700: var(--ac-infohob-700);
+  --ac-theme-800: var(--ac-infohob-800);
+  --ac-theme-900: var(--ac-infohob-900);
+  --ac-theme-950: var(--ac-infohob-950);
+
+  /* font-size: 16px;
   line-height: 24px;
   font-weight: 400;
 
@@ -135,14 +147,32 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; */
 }
 
 body {
   margin: 0;
+  font-family: "Open Sans", sans-serif;
 }
 
-@media (prefers-color-scheme: light) {
+h1 {
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 32px;
+  color: #141414;
+}
+
+a {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  color: #1aa7ec;
+  text-decoration: none;
+}
+
+/* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -153,4 +183,4 @@ body {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
