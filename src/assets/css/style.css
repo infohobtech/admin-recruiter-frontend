@@ -152,17 +152,17 @@
 
 .primary,
 .hover\:primary:hover {
-  --ac-theme-50: var(--ac-primary-50);
-  --ac-theme-100: var(--ac-primary-100);
-  --ac-theme-200: var(--ac-primary-200);
-  --ac-theme-300: var(--ac-primary-300);
-  --ac-theme-400: var(--ac-primary-400);
-  --ac-theme-500: var(--ac-primary-500);
-  --ac-theme-600: var(--ac-primary-600);
-  --ac-theme-700: var(--ac-primary-700);
-  --ac-theme-800: var(--ac-primary-800);
-  --ac-theme-900: var(--ac-primary-900);
-  --ac-theme-950: var(--ac-primary-950);
+  --ac-theme-50: var(--ac-infohob-50);
+  --ac-theme-100: var(--ac-infohob-100);
+  --ac-theme-200: var(--ac-infohob-200);
+  --ac-theme-300: var(--ac-infohob-300);
+  --ac-theme-400: var(--ac-infohob-400);
+  --ac-theme-500: var(--ac-infohob-500);
+  --ac-theme-600: var(--ac-infohob-600);
+  --ac-theme-700: var(--ac-infohob-700);
+  --ac-theme-800: var(--ac-infohob-800);
+  --ac-theme-900: var(--ac-infohob-900);
+  --ac-theme-950: var(--ac-infohob-950);
 }
 
 .secondary,

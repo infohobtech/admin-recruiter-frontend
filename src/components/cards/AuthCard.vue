@@ -14,4 +14,10 @@
   border-radius: 10px;
   padding: 30px 33px;
 }
+
+@media only screen and (max-width: 600px) {
+  .auth-card {
+    padding: 20px 22px;
+  }
+}
 </style>
