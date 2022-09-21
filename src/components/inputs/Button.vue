@@ -1,11 +1,18 @@
 <template>
-  <button :class="classes" type="button" :disabled="disabled">
+  <button
+    :class="classes"
+    :type="type"
+    :disabled="disabled || loading"
+    @click="handleClick"
+  >
     <slot> </slot>
   </button>
 </template>
 
 <script lang="ts" setup>
 import { computed, PropType, useAttrs } from "vue";
+const emit = defineEmits(["click"]);
+
 type colors =
   | "primary"
   | "secondary"
@@ -18,6 +25,8 @@ type colors =
 const attrs = useAttrs();
 
 type sizes = "sm" | "md" | "lg" | "xl" | "xxl" | string;
+
+type types = "submit" | "button" | "reset";
 
 const props = defineProps({
   color: {
@@ -73,6 +82,10 @@ const props = defineProps({
   block: {
     type: Boolean,
     default: false
+  },
+  type: {
+    type: String as PropType<types>,
+    default: "button"
   }
 });
 
@@ -95,19 +108,25 @@ const classes = computed(() => {
 const disabled = computed(() => {
   return props.loading || Boolean(attrs.disabled);
 });
+
+function handleClick() {
+  if (!disabled) {
+    emit("click");
+  }
+}
 </script>
 <style>
 .btn:hover {
   background: var(--ac-theme-500);
 }
 .btn {
-  --font-size: 1rem;
+  --font-size: 14px;
   --border-radius: calc(var(--font-size) * 0.2);
   --color: var(--ac-theme-50);
   --background: var(--ac-theme-600);
   --border: 1px solid var(--ac-theme-600);
-  --padding-x: 1rem;
-  --padding-y: 0.4rem;
+  --padding-x: 32px;
+  --padding-y: 14px;
   outline: 0 solid var(--ac-theme-200);
   border-radius: var(--border-radius);
   font-size: var(--font-size);
@@ -122,6 +141,7 @@ const disabled = computed(() => {
   cursor: pointer;
   outline: 0 solid var(--ac-theme-200);
   user-select: none;
+  font-weight: 600;
 }
 @media (hover: none) {
   .btn {
@@ -132,7 +152,7 @@ const disabled = computed(() => {
   background: var(--ac-theme-500);
 }
 .btn:active {
-  transform: scale(0.95);
+  transform: scale(0.99);
   outline: 0 solid var(--ac-theme-200);
 }
 .btn:focus {
@@ -209,8 +229,8 @@ const disabled = computed(() => {
 
 .btn:disabled {
   opacity: 0.5;
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 .btn-group {
   --font-size: 1rem;
@@ -245,9 +265,9 @@ const disabled = computed(() => {
 .btn-group.md,
 .btn-group.md > .btn,
 .btn-group:not(.sm):not(.lg):not(.xl):not(.xxl) > .btn {
-  --font-size: 1rem;
-  --padding-y: 0.4rem;
-  --padding-x: 1rem;
+  --font-size: 14px;
+  --padding-y: 14px;
+  --padding-x: 32px;
 }
 .btn.lg,
 .btn-group.lg,

@@ -82,6 +82,10 @@ const props = defineProps({
   width: {
     type: String,
     default: "auto"
+  },
+  required: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -163,6 +167,7 @@ onMounted(() => {
       @blur="focused = false"
       :placeholder="generatedPlaceholder"
       :disabled="disabled"
+      :required="required"
       ref="input"
     />
     <div class="input-text__append" v-if="slots.append" @click="focusToInput">
@@ -181,21 +186,21 @@ onMounted(() => {
 .input-text {
   display: flex;
   align-items: center;
-  --font-size: 1.3rem;
-  --padding-y: 0.5rem;
+  --font-size: 14px;
+  --padding-y: 14px;
   --padding-x: calc(var(--padding-y) * 1.5);
-  border: 1px solid var(--ac-theme-500);
+  border: 1px solid #e4e4e4;
   color: var(--ac-gray-600);
   /* margin: 1rem; */
   border-radius: 0.2rem;
   transition: all 0.3s ease;
-  font-size: 1rem;
   position: relative;
   line-height: 1;
   --fl-size: calc(0.75 * var(--font-size));
   --fl-height: calc(-1 * var(--fl-size) - var(--padding-y) * 0.3 - 5px);
   transform: translate(1);
   max-width: 100% !important;
+  font-weight: 400;
 }
 
 .input-text--fl {
@@ -269,8 +274,8 @@ onMounted(() => {
   --padding-y: 0.2rem;
 }
 .input-text.md {
-  --font-size: 1.3rem;
-  --padding-y: 0.5rem;
+  /* --font-size: 1.3rem;
+  --padding-y: 0.5rem; */
 }
 .input-text.lg {
   --font-size: 1.6rem;
