@@ -1,16 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-// import ayolookRoutes from "./ayolook";
-// import ayovueRoutes from "./ayovue";
-
 import Login from "../pages/Login.vue";
+import adminRoutes from "./adminRoutes";
+const AdminPage = () => import("../pages/Admin.vue");
 
 const routes = [
-  { path: "/", component: Login }
-  //   {
-  //     path: "/ayolook",
-  //     component: AyoLook,
-  //     children: ayolookRoutes
-  //   }
+  { path: "/", component: Login },
+  { path: "/admin", component: AdminPage, children: adminRoutes }
 ];
 
 const router = createRouter({

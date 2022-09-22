@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { useRouter } from "vue-router";
+
 import { reactive, ref } from "vue";
 import AuthLayout from "../layouts/AuthLayout.vue";
 import AuthCard from "../components/cards/AuthCard.vue";
@@ -6,6 +8,8 @@ import InputText from "../components/inputs/InputText.vue";
 import Button from "../components/inputs/Button.vue";
 import authService from "../services/authService";
 import { handleError, handleSuccess } from "../utils/globalFunctions";
+
+const router = useRouter();
 
 const formData = reactive({ email: "", password: "" });
 const loggingIn = ref(false);
@@ -18,6 +22,7 @@ function handleSubmit() {
     .login(formData)
     .then((res) => {
       handleSuccess(res);
+      router.push("/admin/dashboard");
     })
     .catch((e) => {
       handleError(e);
@@ -35,7 +40,7 @@ function toggleShowHide() {
 <template>
   <AuthLayout>
     <div class="ta-center">
-      <img src="/img/logo.png" alt="" />
+      <img src="/img/logos/logo.png" alt="" />
     </div>
 
     <AuthCard class="mt-5">
