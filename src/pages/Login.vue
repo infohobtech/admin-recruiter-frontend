@@ -35,7 +35,7 @@ function toggleShowHide() {
 <template>
   <AuthLayout>
     <div class="ta-center">
-      <img src="/img/logo.png" alt="" />
+      <img src="/img/logos/logo.png" alt="" />
     </div>
 
     <AuthCard class="mt-5">
