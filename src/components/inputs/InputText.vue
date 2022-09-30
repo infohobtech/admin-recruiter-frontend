@@ -192,7 +192,7 @@ onMounted(() => {
   border: 1px solid #e4e4e4;
   color: var(--ac-gray-600);
   /* margin: 1rem; */
-  border-radius: 0.2rem;
+  border-radius: 4px;
   transition: all 0.3s ease;
   position: relative;
   line-height: 1;
@@ -201,6 +201,7 @@ onMounted(() => {
   transform: translate(1);
   max-width: 100% !important;
   font-weight: 400;
+  background-color: #fff;
 }
 
 .input-text--fl {

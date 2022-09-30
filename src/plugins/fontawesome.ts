@@ -7,14 +7,31 @@ import {
   faUsers,
   faUserGroup,
   faGear,
-  faAngleDown
+  faAngleDown,
+  faIndustry,
+  faPlus,
+  faSearch,
+  faPenToSquare,
+  faTrash
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faHome, faBorderAll, faUsers, faUserGroup, faGear, faAngleDown);
+library.add(
+  faHome,
+  faBorderAll,
+  faUsers,
+  faUserGroup,
+  faGear,
+  faAngleDown,
+  faIndustry,
+  faPlus,
+  faSearch,
+  faPenToSquare,
+  faTrash
+);
 
 declare module "@vue/runtime-core" {
   export interface GlobalComponents {
-    AIcon: typeof FontAwesomeIcon;
+    FIcon: typeof FontAwesomeIcon;
   }
 }
 

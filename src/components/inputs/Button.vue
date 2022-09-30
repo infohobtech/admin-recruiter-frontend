@@ -110,7 +110,7 @@ const disabled = computed(() => {
 });
 
 function handleClick() {
-  if (!disabled) {
+  if (!disabled.value) {
     emit("click");
   }
 }
