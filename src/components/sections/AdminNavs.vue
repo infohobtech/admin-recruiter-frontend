@@ -18,6 +18,15 @@
       </div>
     </router-link>
 
+    <router-link class="admin-nav d-block" to="/admin/industry">
+      <div class="flex ai-center">
+        <div class="admin-nav__icon">
+          <FIcon icon="industry"></FIcon>
+        </div>
+        <div class="admin-nav__text flex-1 ml-2">Industry</div>
+      </div>
+    </router-link>
+
     <router-link class="admin-nav d-block" to="/admin/recruiter">
       <div class="flex ai-center">
         <div class="admin-nav__icon">

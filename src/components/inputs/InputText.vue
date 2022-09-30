@@ -201,6 +201,7 @@ onMounted(() => {
   transform: translate(1);
   max-width: 100% !important;
   font-weight: 400;
+  background-color: #fff;
 }
 
 .input-text--fl {
