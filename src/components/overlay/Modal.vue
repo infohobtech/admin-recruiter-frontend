@@ -149,4 +149,10 @@ function closeModal() {
   transform: scale(0.5);
   opacity: 0;
 }
+
+@media screen and (max-width: 700px) {
+  .modal__container {
+    padding: 35px 20px;
+  }
+}
 </style>

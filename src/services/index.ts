@@ -50,3 +50,23 @@ axiosAdmin.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+// Add a response interceptor
+axiosAuth.interceptors.response.use(
+  function (response) {
+    // Do something with response data
+    return response;
+  },
+  function (error) {
+    console.log(error);
+    // Do something with response error
+    if (error.response && error.response.status == 401) {
+      if (window.location.href.indexOf("force-logout") === -1) {
+        setTimeout(() => {
+          window.location.href = "/force-logout";
+        }, 111);
+      }
+    }
+    return Promise.reject(error);
+  }
+);

@@ -1,6 +1,14 @@
+<script setup lang="ts">
+const emit = defineEmits(["nav-click"]);
+</script>
+
 <template>
   <div class="admin-navs">
-    <router-link class="admin-nav d-block" to="/admin/dashboard">
+    <router-link
+      @click="emit('nav-click')"
+      class="admin-nav d-block"
+      to="/admin/dashboard"
+    >
       <div class="flex ai-center">
         <div class="admin-nav__icon">
           <FIcon icon="border-all"></FIcon>
@@ -9,7 +17,11 @@
       </div>
     </router-link>
 
-    <router-link class="admin-nav d-block" to="/admin/jobseeker">
+    <router-link
+      @click="emit('nav-click')"
+      class="admin-nav d-block"
+      to="/admin/jobseeker"
+    >
       <div class="flex ai-center">
         <div class="admin-nav__icon">
           <FIcon icon="users"></FIcon>
@@ -18,7 +30,11 @@
       </div>
     </router-link>
 
-    <router-link class="admin-nav d-block" to="/admin/industry">
+    <router-link
+      @click="emit('nav-click')"
+      class="admin-nav d-block"
+      to="/admin/industry"
+    >
       <div class="flex ai-center">
         <div class="admin-nav__icon">
           <FIcon icon="industry"></FIcon>
@@ -27,7 +43,11 @@
       </div>
     </router-link>
 
-    <router-link class="admin-nav d-block" to="/admin/recruiter">
+    <router-link
+      @click="emit('nav-click')"
+      class="admin-nav d-block"
+      to="/admin/recruiter"
+    >
       <div class="flex ai-center">
         <div class="admin-nav__icon">
           <FIcon icon="user-group"></FIcon>
@@ -36,7 +56,11 @@
       </div>
     </router-link>
 
-    <router-link class="admin-nav d-block" to="/admin/jobs">
+    <router-link
+      @click="emit('nav-click')"
+      class="admin-nav d-block"
+      to="/admin/jobs"
+    >
       <div class="flex ai-center">
         <div class="admin-nav__icon">
           <FIcon icon="user-group"></FIcon>
@@ -45,7 +69,11 @@
       </div>
     </router-link>
 
-    <router-link class="admin-nav d-block" to="/admin/settings">
+    <router-link
+      @click="emit('nav-click')"
+      class="admin-nav d-block"
+      to="/admin/settings"
+    >
       <div class="flex ai-center">
         <div class="admin-nav__icon">
           <FIcon icon="gear"></FIcon>
