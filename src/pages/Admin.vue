@@ -1,13 +1,32 @@
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import DashboardLayout from "../layouts/DashboardLayout.vue";
 import { handleError, handleSuccess } from "../utils/globalFunctions";
 import AdminNavs from "../components/sections/AdminNavs.vue";
 import AdminHeader from "../components/sections/AdminHeader.vue";
+import { useRouter } from "vue-router";
+
+import { setAdminHeaders } from "../services";
 
 const formData = reactive({ email: "", password: "" });
 const loggingIn = ref(false);
 const showPassword = ref(false);
+const router = useRouter();
+
+onMounted(() => {
+  verifyLoggedIn();
+});
+
+function verifyLoggedIn() {
+  const token = localStorage.getItem("token");
+  const refreshToken = localStorage.getItem("refreshToken");
+
+  if (!token || !refreshToken) {
+    router.push("/");
+  } else {
+    setAdminHeaders(token);
+  }
+}
 </script>
 
 <template>

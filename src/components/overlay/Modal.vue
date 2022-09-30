@@ -8,11 +8,11 @@
             :style="{ width: width }"
             v-show="modelValue"
           >
+            <div class="modal__close" @click="closeModal">&times;</div>
             <div v-if="!hideHeader" @click.stop>
               <slot name="header">
                 <div class="modal__header d-flex jc-between">
                   <div class="modal__heading">{{ heading }}</div>
-                  <div class="modal__close" @click="closeModal">&times;</div>
                 </div>
               </slot>
             </div>
@@ -69,7 +69,7 @@ function closeModal() {
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.65);
   z-index: 999999;
   display: flex;
   justify-content: center;
@@ -78,37 +78,51 @@ function closeModal() {
 .modal__container {
   max-width: 95%;
   min-height: 22px;
-  background-color: rgb(235, 235, 235);
+  background-color: #fff;
   border-radius: 9px;
   box-shadow: 0 0 15px 5px rgb(0 0 0 / 20%);
+  padding: 44px 93px;
+  position: relative;
 }
 /* .modal__container--lg {
     width: 555px;
   } */
 .modal__header {
-  font-size: 22px;
-  font-weight: bold;
-  color: var(--brand-color);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #505565;
 }
 .modal__heading {
-  padding: 22px 33px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #a1a4b1;
+  flex: 1;
 }
 .modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 999;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  padding: 4px 22px;
-  font-weight: bold;
-  font-size: 33px;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  background-color: rgba(255, 137, 137, 0.2);
+  color: #ff8989;
+  font-size: 27px;
+  font-weight: normal;
 }
 .modal__close:hover {
+  background-color: rgba(255, 137, 137, 0.4);
+
   color: red;
 }
 .modal__body {
-  padding: 0 33px;
+  padding: 33px 4px;
   padding-bottom: 24px;
-  padding-top: 0;
   max-height: 80vh;
   overflow-y: auto;
   border-radius: 9px;

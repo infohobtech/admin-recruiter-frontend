@@ -321,3 +321,15 @@ table.data tbody tr:hover {
 .action-icon--delete:hover {
   color: #d12a00;
 }
+
+.label {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #505565;
+}
+
+hr {
+  border-top: 0;
+  border-bottom: 1px solid #f0f1f3;
+}

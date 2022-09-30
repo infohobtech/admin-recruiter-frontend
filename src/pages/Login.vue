@@ -8,6 +8,7 @@ import InputText from "../components/inputs/InputText.vue";
 import Button from "../components/inputs/Button.vue";
 import authService from "../services/authService";
 import { handleError, handleSuccess } from "../utils/globalFunctions";
+import { setAdminHeaders } from "../services";
 
 const router = useRouter();
 
@@ -22,6 +23,9 @@ function handleSubmit() {
     .login(formData)
     .then((res) => {
       handleSuccess(res);
+      setAdminHeaders(res.data.token);
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("refreshToken", res.data.refreshToken);
       router.push("/admin/dashboard");
     })
     .catch((e) => {
