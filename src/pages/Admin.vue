@@ -24,6 +24,7 @@ function verifyLoggedIn() {
   if (!token || !refreshToken) {
     router.push("/");
   } else {
+    // console.log("setted", token);
     setAdminHeaders(token);
   }
 }
