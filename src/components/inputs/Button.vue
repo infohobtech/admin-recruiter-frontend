@@ -142,6 +142,7 @@ function handleClick() {
   outline: 0 solid var(--ac-theme-200);
   user-select: none;
   font-weight: 600;
+  min-width: 88px;
 }
 @media (hover: none) {
   .btn {
@@ -308,5 +309,11 @@ function handleClick() {
 .btn-group > .btn:last-child {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+@media screen and (max-width: 700px) {
+  .btn.md {
+    --padding-x: 14px;
+  }
 }
 </style>

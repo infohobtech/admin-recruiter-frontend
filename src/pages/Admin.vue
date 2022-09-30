@@ -2,8 +2,6 @@
 import { onMounted, reactive, ref } from "vue";
 import DashboardLayout from "../layouts/DashboardLayout.vue";
 import { handleError, handleSuccess } from "../utils/globalFunctions";
-import AdminNavs from "../components/sections/AdminNavs.vue";
-import AdminHeader from "../components/sections/AdminHeader.vue";
 import { useRouter } from "vue-router";
 
 import { setAdminHeaders } from "../services";
@@ -32,13 +30,13 @@ function verifyLoggedIn() {
 
 <template>
   <DashboardLayout>
-    <template #navigation>
+    <!-- <template #navigation>
       <AdminNavs></AdminNavs>
     </template>
 
     <template #header>
       <AdminHeader></AdminHeader>
-    </template>
+    </template> -->
 
     <template #main>
       <RouterView></RouterView>

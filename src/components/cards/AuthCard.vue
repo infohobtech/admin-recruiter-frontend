@@ -17,7 +17,8 @@
 
 @media only screen and (max-width: 600px) {
   .auth-card {
-    padding: 20px 22px;
+    padding: 5px;
+    border: 0;
   }
 }
 </style>
