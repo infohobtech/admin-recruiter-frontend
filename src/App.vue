@@ -29,6 +29,8 @@ function refreshToken() {
     .refreshToken(rt)
     .then((res) => {
       setAdminHeaders(res.data.token);
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("refreshToken", res.data.refreshToken);
     })
     .catch()
     .finally(() => {});
