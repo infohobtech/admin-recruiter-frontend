@@ -60,7 +60,7 @@ onMounted(() => {
 }
 .dashboard__left {
   left: 0px;
-  width: 226px;
+  width: 244px;
   z-index: 3;
   display: flex;
   background-color: #fff;
@@ -69,7 +69,7 @@ onMounted(() => {
 }
 
 .dashboard__left--collapsed {
-  left: -230px !important;
+  left: -244px !important;
 }
 
 .dashboard__brand {

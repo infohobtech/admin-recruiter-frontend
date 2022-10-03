@@ -311,9 +311,11 @@ function handleClick() {
   border-bottom-left-radius: 0;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 720px) {
   .btn.md {
-    --padding-x: 14px;
+    --font-size: 14px;
+    --padding-y: 7px;
+    --padding-x: 9px;
   }
 }
 </style>

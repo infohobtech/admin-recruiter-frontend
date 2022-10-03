@@ -13,7 +13,9 @@ import {
   faSearch,
   faPenToSquare,
   faTrash,
-  faBars
+  faBars,
+  faNetworkWired,
+  faGears
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -28,7 +30,9 @@ library.add(
   faSearch,
   faPenToSquare,
   faTrash,
-  faBars
+  faBars,
+  faNetworkWired,
+  faGears
 );
 
 declare module "@vue/runtime-core" {

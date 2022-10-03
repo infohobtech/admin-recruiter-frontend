@@ -175,7 +175,7 @@ onMounted(() => {
     </div>
     <div
       class="input-text__append input-text__clear"
-      v-if="clearable && (modelValue || modelValue == 0)"
+      v-if="clearable && modelValue !== ''"
       @click="clearValue"
     ></div>
   </div>
@@ -188,7 +188,7 @@ onMounted(() => {
   align-items: center;
   --font-size: 14px;
   --padding-y: 14px;
-  --padding-x: calc(var(--padding-y) * 1.5);
+  --padding-x: calc(var(--padding-y) * 1.3);
   border: 1px solid #e4e4e4;
   color: var(--ac-gray-600);
   /* margin: 1rem; */
