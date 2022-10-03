@@ -50,9 +50,9 @@ interface IndustryModel {
 }
 const industries = ref<Array<IndustryModel>>([]);
 
-const gettting = ref(true);
+const getting = ref(true);
 function getAllIndustries() {
-  gettting.value = true;
+  getting.value = true;
   adminService
     .getAllIndustries()
     .then((res) => {
@@ -62,7 +62,7 @@ function getAllIndustries() {
       handleError(e);
     })
     .finally(() => {
-      gettting.value = false;
+      getting.value = false;
     });
 }
 
@@ -123,6 +123,19 @@ function editNow() {
       editing.value = false;
     });
 }
+
+const searchKeyword = ref("");
+const filteredIndustries = computed(() => {
+  if (!searchKeyword.value) {
+    return industries.value;
+  }
+
+  return industries.value.filter((item) => {
+    return (
+      item.title.toLowerCase().indexOf(searchKeyword.value.toLowerCase()) > -1
+    );
+  });
+});
 </script>
 
 <template>
@@ -134,13 +147,18 @@ function editNow() {
       </Button>
     </div>
 
-    <InputText placeholder="Search Industry listing" class="mt-3">
+    <InputText
+      placeholder="Search Industry listing"
+      class="mt-3"
+      v-model="searchKeyword"
+      clearable
+    >
       <template #prepend>
         <FIcon class="mr-1" icon="search"></FIcon>
       </template>
     </InputText>
 
-    <div class="text-center mt-4" v-if="gettting">Loading...</div>
+    <ContentLoader v-if="getting" class="mt-4"> </ContentLoader>
 
     <table class="data mt-4" v-else>
       <thead>
@@ -153,7 +171,7 @@ function editNow() {
       </thead>
 
       <tbody>
-        <tr v-for="industry in industries" :key="industry.id">
+        <tr v-for="industry in filteredIndustries" :key="industry.id">
           <td>{{ industry.id }}</td>
           <td>{{ industry.title }}</td>
           <td>
