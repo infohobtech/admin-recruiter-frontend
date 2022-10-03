@@ -11,23 +11,22 @@ const form = reactive({
 
 function resetForm() {
   form.title = "";
-  selectedIndustry.value = { id: 0, title: "" };
+  selectedNetwork.value = { id: 0, title: "" };
 }
 
 function showAddModal() {
-  console.log("Showing...");
   addModal.value = true;
 }
 
-function addIndustry() {
+function addNetwork() {
   adding.value = true;
   adminService
-    .addIndustry(form)
+    .addNetwork(form)
     .then((res) => {
       handleSuccess(res);
       addModal.value = false;
       resetForm();
-      getAllIndustries();
+      getAllNetworks();
     })
     .catch((e) => {
       handleError(e);
@@ -40,22 +39,22 @@ function addIndustry() {
 const adding = ref(false);
 
 onMounted(() => {
-  setTimeout(getAllIndustries, 111);
+  setTimeout(getAllNetworks, 111);
 });
 
-interface IndustryModel {
+interface NetworkModel {
   id: number;
   title: string;
 }
-const industries = ref<Array<IndustryModel>>([]);
+const networks = ref<Array<NetworkModel>>([]);
 
 const getting = ref(true);
-function getAllIndustries() {
+function getAllNetworks() {
   getting.value = true;
   adminService
-    .getAllIndustries()
+    .getAllNetworks()
     .then((res) => {
-      industries.value = res.data.industries;
+      networks.value = res.data.networks;
     })
     .catch((e) => {
       handleError(e);
@@ -73,7 +72,7 @@ const isFormValid = computed(() => {
   return true;
 });
 const isEditFormValid = computed(() => {
-  if (!selectedIndustry.value.title) {
+  if (!selectedNetwork.value.title) {
     return false;
   }
 
@@ -82,17 +81,17 @@ const isEditFormValid = computed(() => {
 
 const deleteModal = ref(false);
 const deleting = ref(false);
-const selectedIndustry = ref<IndustryModel>({ id: 0, title: "" });
+const selectedNetwork = ref<NetworkModel>({ id: 0, title: "" });
 
 function deleteNow() {
   deleting.value = true;
   adminService
-    .deleteIndustry(selectedIndustry.value.id)
+    .deleteNetwork(selectedNetwork.value.id)
     .then((res) => {
       handleSuccess(res);
       deleteModal.value = false;
       resetForm();
-      getAllIndustries();
+      getAllNetworks();
     })
     .catch((e) => {
       handleError(e);
@@ -108,12 +107,11 @@ const editing = ref(false);
 function editNow() {
   editing.value = true;
   adminService
-    .editIndustry(selectedIndustry.value)
+    .editNetwork(selectedNetwork.value)
     .then((res) => {
       handleSuccess(res);
       editModal.value = false;
       resetForm();
-      // getAllIndustries();
     })
     .catch((e) => {
       handleError(e);
@@ -124,12 +122,12 @@ function editNow() {
 }
 
 const searchKeyword = ref("");
-const filteredIndustries = computed(() => {
+const filteredNetworks = computed(() => {
   if (!searchKeyword.value) {
-    return industries.value;
+    return networks.value;
   }
 
-  return industries.value.filter((item) => {
+  return networks.value.filter((item) => {
     return (
       item.title.toLowerCase().indexOf(searchKeyword.value.toLowerCase()) > -1
     );
@@ -140,14 +138,14 @@ const filteredIndustries = computed(() => {
 <template>
   <div>
     <div class="flex jc-between ai-center">
-      <h3>Total Industry List</h3>
+      <h3>Total Social Network</h3>
       <Button @click="showAddModal">
-        <FIcon class="mr-1" icon="plus"></FIcon> Create Industry
+        <FIcon class="mr-1" icon="plus"></FIcon> Social Network
       </Button>
     </div>
 
     <InputText
-      placeholder="Search Industry listing"
+      placeholder="Search Social Network"
       class="mt-3"
       v-model="searchKeyword"
       clearable
@@ -170,14 +168,14 @@ const filteredIndustries = computed(() => {
       </thead>
 
       <tbody>
-        <tr v-for="(industry, i) in filteredIndustries" :key="industry.id">
+        <tr v-for="(network, i) in filteredNetworks" :key="network.id">
           <td>{{ i + 1 }}</td>
-          <td>{{ industry.title }}</td>
+          <td>{{ network.title }}</td>
           <td>
             <div
               class="action-icon"
               @click="
-                selectedIndustry = industry;
+                selectedNetwork = network;
                 editModal = true;
               "
             >
@@ -189,7 +187,7 @@ const filteredIndustries = computed(() => {
             <div
               class="action-icon action-icon--delete"
               @click="
-                selectedIndustry = industry;
+                selectedNetwork = network;
                 deleteModal = true;
               "
             >
@@ -201,12 +199,12 @@ const filteredIndustries = computed(() => {
       </tbody>
     </table>
 
-    <Modal v-model="addModal" heading="Create Industry">
-      <form @submit.prevent="addIndustry">
-        <div class="label">Industry Title</div>
+    <Modal v-model="addModal" heading="Add Social Network">
+      <form @submit.prevent="addNetwork">
+        <div class="label">Social Network Title</div>
         <InputText
           v-model="form.title"
-          placeholder="Enter Industry Tile"
+          placeholder="Enter Social Network"
           class="mt-2"
           required
         ></InputText>
@@ -223,12 +221,12 @@ const filteredIndustries = computed(() => {
       </form>
     </Modal>
 
-    <Modal v-model="editModal" heading="Edit Industry">
+    <Modal v-model="editModal" heading="Edit Social Network">
       <form @submit.prevent="editNow">
-        <div class="label">Industry Title</div>
+        <div class="label">Social Network Title</div>
         <InputText
-          v-model="selectedIndustry.title"
-          placeholder="Enter Industry Tile"
+          v-model="selectedNetwork.title"
+          placeholder="Enter Social Network"
           class="mt-2"
           required
         ></InputText>
@@ -245,7 +243,7 @@ const filteredIndustries = computed(() => {
     <Modal v-model="deleteModal" heading="Are you sure?">
       <p>
         Are you sure you want to delete
-        <strong>{{ selectedIndustry.title }}.</strong> This can not be undone.
+        <strong>{{ selectedNetwork.title }}.</strong> This can not be undone.
       </p>
       <div class="mt-4 flex jc-end ai-center">
         <Button class="mr-4" outlined type="reset" @click="deleteModal = false">

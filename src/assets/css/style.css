@@ -251,6 +251,16 @@ h2 {
   color: #141414;
 }
 
+h3 {
+  font-size: 25px;
+}
+
+@media only screen and (max-width: 720px) {
+  h3 {
+    font-size: 17px;
+  }
+}
+
 a {
   font-weight: 400;
   font-size: 14px;
@@ -275,6 +285,10 @@ a {
 table.data {
   width: 100%;
   border-collapse: collapse;
+  font-size: 15px;
+}
+
+@media screen and (max-width: 720px) {
 }
 
 table.data th {

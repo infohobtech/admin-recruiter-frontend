@@ -42,6 +42,31 @@ const emit = defineEmits(["nav-click"]);
         <div class="admin-nav__text flex-1 ml-2">Industry</div>
       </div>
     </router-link>
+    <router-link
+      @click="emit('nav-click')"
+      class="admin-nav d-block"
+      to="/admin/social-networks"
+    >
+      <div class="flex ai-center">
+        <div class="admin-nav__icon">
+          <FIcon icon="network-wired"></FIcon>
+        </div>
+        <div class="admin-nav__text flex-1 ml-2">Social Networks</div>
+      </div>
+    </router-link>
+
+    <router-link
+      @click="emit('nav-click')"
+      class="admin-nav d-block"
+      to="/admin/skills"
+    >
+      <div class="flex ai-center">
+        <div class="admin-nav__icon">
+          <FIcon icon="gears"></FIcon>
+        </div>
+        <div class="admin-nav__text flex-1 ml-2">Skills</div>
+      </div>
+    </router-link>
 
     <router-link
       @click="emit('nav-click')"
