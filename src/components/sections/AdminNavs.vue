@@ -67,6 +67,18 @@ const emit = defineEmits(["nav-click"]);
         <div class="admin-nav__text flex-1 ml-2">Skills</div>
       </div>
     </router-link>
+    <router-link
+      @click="emit('nav-click')"
+      class="admin-nav d-block"
+      to="/admin/country-list"
+    >
+      <div class="flex ai-center">
+        <div class="admin-nav__icon">
+          <FIcon icon="flag"></FIcon>
+        </div>
+        <div class="admin-nav__text flex-1 ml-2">Coultry List</div>
+      </div>
+    </router-link>
 
     <router-link
       @click="emit('nav-click')"
