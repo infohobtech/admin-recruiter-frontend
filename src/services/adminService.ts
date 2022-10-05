@@ -1,6 +1,12 @@
 import { axiosAdmin } from ".";
 
 type IndustryModel = { title: string; id?: number };
+type CountryModel = {
+  name: string;
+  phoneCode: string;
+  shortName: string;
+  id?: number;
+};
 
 export default {
   getUserInfo() {
@@ -35,6 +41,7 @@ export default {
   deleteNetwork(payload: number) {
     return axiosAdmin.delete("/network/" + payload);
   },
+
   getAllSkills() {
     return axiosAdmin.get("/skill");
   },
@@ -48,5 +55,20 @@ export default {
 
   deleteSkill(payload: number) {
     return axiosAdmin.delete("/skill/" + payload);
+  },
+
+  getAllCountries() {
+    return axiosAdmin.get("/country");
+  },
+  addCountry(payload: CountryModel) {
+    return axiosAdmin.post("/country", payload);
+  },
+
+  editCountry(payload: CountryModel) {
+    return axiosAdmin.put("/country/" + payload.id, payload);
+  },
+
+  deleteCountry(payload: number) {
+    return axiosAdmin.delete("/country/" + payload);
   }
 };

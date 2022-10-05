@@ -15,7 +15,8 @@ import {
   faTrash,
   faBars,
   faNetworkWired,
-  faGears
+  faGears,
+  faFlag
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -32,7 +33,8 @@ library.add(
   faTrash,
   faBars,
   faNetworkWired,
-  faGears
+  faGears,
+  faFlag
 );
 
 declare module "@vue/runtime-core" {
