@@ -14,7 +14,7 @@ export default [
   { path: "industry", component: Industry },
   { path: "social-networks", component: SocialNetworks },
   { path: "skills", component: Skills },
-  { path: "country-list", component: CountryList },
+  { path: "country-list/:countryId", component: CountryList },
   { path: "recruiter", component: Recruiter },
   { path: "jobs", component: Jobs },
   { path: "settings", component: Settings }

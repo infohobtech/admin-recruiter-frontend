@@ -1,8 +1,14 @@
 <script lang="ts" setup>
 import { onMounted, reactive, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import adminService from "../../services/adminService";
 import { handleError, handleSuccess } from "../../utils/globalFunctions";
 import { computed } from "@vue/reactivity";
+
+import CountryStates from "./CountryStates.vue";
+
+const router = useRouter();
+const route = useRoute();
 
 const addModal = ref(false);
 const form = reactive({
@@ -154,14 +160,24 @@ const filteredCountries = computed(() => {
     );
   });
 });
+
+function manageCountry(country: CountryModel) {
+  selectedCountry.value = country;
+  router.push(`/admin/country-list/${country.id}`);
+}
+
+const selectedCountryId = computed(() => {
+  return route.params.countryId;
+});
 </script>
 
 <template>
-  <div>
+  <div v-if="selectedCountryId === 'all'">
     <div class="flex jc-between ai-center">
       <h3>Total Country</h3>
       <Button @click="showAddModal">
-        <FIcon class="mr-1" icon="plus"></FIcon> Country
+        <FIcon class="mr-1" icon="plus"></FIcon>
+        <span class="d-md-inline-block d-none">Add </span> Country
       </Button>
     </div>
 
@@ -198,13 +214,7 @@ const filteredCountries = computed(() => {
           <td>{{ country.shortName }}</td>
           <td>{{ country.phoneCode }}</td>
           <td>
-            <div
-              class="action-icon"
-              @click="
-                selectedCountry = country;
-                editModal = true;
-              "
-            >
+            <div class="action-icon" @click="manageCountry(country)">
               <FIcon icon="pen-to-square"></FIcon>
               <div class="ml-1">Manage</div>
             </div>
@@ -343,4 +353,12 @@ const filteredCountries = computed(() => {
       </div>
     </Modal>
   </div>
+
+  <CountryStates
+    v-else
+    :country-code="selectedCountry.phoneCode"
+    :country-name="selectedCountry.name"
+    :short-code="selectedCountry.shortName"
+    :country-id="selectedCountryId + ''"
+  ></CountryStates>
 </template>
