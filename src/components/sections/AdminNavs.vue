@@ -70,7 +70,7 @@ const emit = defineEmits(["nav-click"]);
     <router-link
       @click="emit('nav-click')"
       class="admin-nav d-block"
-      to="/admin/country-list"
+      to="/admin/country-list/all"
     >
       <div class="flex ai-center">
         <div class="admin-nav__icon">

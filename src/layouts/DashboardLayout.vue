@@ -106,6 +106,7 @@ onMounted(() => {
   border-radius: 38px 0px 0px 38px;
   overflow-y: auto;
   margin-bottom: 30px;
+  position: relative;
 }
 
 @media screen and (max-width: 700px) {
