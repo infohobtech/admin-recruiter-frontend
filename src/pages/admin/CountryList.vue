@@ -359,5 +359,6 @@ const selectedCountryId = computed(() => {
     :country-code="selectedCountry.phoneCode"
     :country-name="selectedCountry.name"
     :short-code="selectedCountry.shortName"
+    :country-id="selectedCountryId + ''"
   ></CountryStates>
 </template>

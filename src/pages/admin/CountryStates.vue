@@ -4,14 +4,16 @@ import adminService from "../../services/adminService";
 import { handleError, handleSuccess } from "../../utils/globalFunctions";
 import { computed } from "@vue/reactivity";
 
-interface CountryModel {
-  name: string;
-  phoneCode: string;
-  shortName: string;
+interface StateModel {
   id?: number;
+  name: string;
 }
 
 const props = defineProps({
+  countryId: {
+    type: String,
+    default: ""
+  },
   countryName: {
     type: String,
     default: ""
@@ -28,19 +30,13 @@ const props = defineProps({
 
 const addModal = ref(false);
 const form = reactive({
-  name: "",
-  phoneCode: "",
-  shortName: ""
+  name: ""
 });
 
 function resetForm() {
   form.name = "";
-  form.phoneCode = "";
-  form.shortName = "";
-  selectedCountry.value = {
-    name: "",
-    phoneCode: "",
-    shortName: ""
+  selectedState.value = {
+    name: ""
   };
 }
 
@@ -48,15 +44,15 @@ function showAddModal() {
   addModal.value = true;
 }
 
-function addCountry() {
+function addState() {
   adding.value = true;
   adminService
-    .addCountry(form)
+    .addState(props.countryId, form)
     .then((res) => {
       handleSuccess(res);
       addModal.value = false;
       resetForm();
-      getAllCountries();
+      getAllStates();
     })
     .catch((e) => {
       handleError(e);
@@ -69,24 +65,18 @@ function addCountry() {
 const adding = ref(false);
 
 onMounted(() => {
-  setTimeout(getAllCountries, 111);
+  setTimeout(getAllStates, 111);
 });
 
-interface CountryModel {
-  name: string;
-  phoneCode: string;
-  shortName: string;
-  id?: number;
-}
-const countries = ref<Array<CountryModel>>([]);
+const states = ref<Array<StateModel>>([]);
 
 const getting = ref(true);
-function getAllCountries() {
+function getAllStates() {
   getting.value = true;
   adminService
-    .getAllCountries()
+    .getAllStates(props.countryId)
     .then((res) => {
-      countries.value = res.data.countries;
+      states.value = res.data.states;
     })
     .catch((e) => {
       handleError(e);
@@ -97,18 +87,14 @@ function getAllCountries() {
 }
 
 const isFormValid = computed(() => {
-  if (!form.name || !form.shortName || !form.phoneCode) {
+  if (!form.name) {
     return false;
   }
   return true;
 });
 
 const isEditFormValid = computed(() => {
-  if (
-    !selectedCountry.value.name ||
-    !selectedCountry.value.shortName ||
-    !selectedCountry.value.phoneCode
-  ) {
+  if (!selectedState.value.name) {
     return false;
   }
 
@@ -117,22 +103,20 @@ const isEditFormValid = computed(() => {
 
 const deleteModal = ref(false);
 const deleting = ref(false);
-const selectedCountry = ref<CountryModel>({
+const selectedState = ref<StateModel>({
   id: 0,
-  name: "",
-  shortName: "",
-  phoneCode: ""
+  name: ""
 });
 
 function deleteNow() {
   deleting.value = true;
   adminService
-    .deleteCountry(selectedCountry.value.id!!)
+    .deleteState(selectedState.value.id!!)
     .then((res) => {
       handleSuccess(res);
       deleteModal.value = false;
       resetForm();
-      getAllCountries();
+      getAllStates();
     })
     .catch((e) => {
       handleError(e);
@@ -148,7 +132,7 @@ const editing = ref(false);
 function editNow() {
   editing.value = true;
   adminService
-    .editCountry(selectedCountry.value)
+    .editState(selectedState.value)
     .then((res) => {
       handleSuccess(res);
       editModal.value = false;
@@ -163,16 +147,14 @@ function editNow() {
 }
 
 const searchKeyword = ref("");
-const filteredCountries = computed(() => {
+const filteredStates = computed(() => {
   if (!searchKeyword.value) {
-    return countries.value;
+    return states.value;
   }
 
-  return countries.value.filter((item) => {
+  return states.value.filter((item) => {
     return (
-      item.name.toLowerCase().indexOf(searchKeyword.value.toLowerCase()) > -1 ||
-      item.shortName.toLowerCase().indexOf(searchKeyword.value.toLowerCase()) >
-        -1
+      item.name.toLowerCase().indexOf(searchKeyword.value.toLowerCase()) > -1
     );
   });
 });
@@ -182,7 +164,7 @@ const filteredCountries = computed(() => {
   <div>
     <div class="country-info">
       <div class="flex ai-center jc-between">
-        <div>
+        <div class="pr-2">
           Country Name: {{ countryName }}
           <br />
 
@@ -190,9 +172,9 @@ const filteredCountries = computed(() => {
           <br />
         </div>
 
-        <router-link to="/admin/country-list/all">
+        <router-link to="/admin/country-list/all" :style="{ minWidth: '44px' }">
           <FIcon icon="angle-left" class="mr-1"></FIcon>
-          Back to countriy list
+          Back <span class="d-md-inline-block d-none"> to countriy list </span>
         </router-link>
       </div>
     </div>
@@ -219,42 +201,24 @@ const filteredCountries = computed(() => {
 
       <ContentLoader v-if="getting" class="mt-4"> </ContentLoader>
 
-      <table class="data mt-4" v-if="false">
+      <table class="data mt-4" v-else>
         <thead>
           <tr>
-            <th>INDEX</th>
-            <th>COUNTRY NAME</th>
-            <th>SHORT CODE</th>
-            <th>COUNTRY CODE</th>
-            <th>MANAGE STATE</th>
+            <th>STATE NAME</th>
             <th>EDIT</th>
             <th>DELETE</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr v-for="(country, i) in filteredCountries" :key="country.id">
-            <td>{{ i + 1 }}</td>
-            <td>{{ country.name }}</td>
-            <td>{{ country.shortName }}</td>
-            <td>{{ country.phoneCode }}</td>
+          <tr v-for="(state, i) in filteredStates" :key="state.id">
+            <td>{{ state.name }}</td>
+
             <td>
               <div
                 class="action-icon"
                 @click="
-                  selectedCountry = country;
-                  editModal = true;
-                "
-              >
-                <FIcon icon="pen-to-square"></FIcon>
-                <div class="ml-1">Manage</div>
-              </div>
-            </td>
-            <td>
-              <div
-                class="action-icon"
-                @click="
-                  selectedCountry = country;
+                  selectedState = state;
                   editModal = true;
                 "
               >
@@ -266,7 +230,7 @@ const filteredCountries = computed(() => {
               <div
                 class="action-icon action-icon--delete"
                 @click="
-                  selectedCountry = country;
+                  selectedState = state;
                   deleteModal = true;
                 "
               >
@@ -278,39 +242,15 @@ const filteredCountries = computed(() => {
         </tbody>
       </table>
 
-      <Modal v-model="addModal" heading="Add Country">
-        <form @submit.prevent="addCountry">
-          <div class="label">Country Name</div>
+      <Modal v-model="addModal" heading="Add State">
+        <form @submit.prevent="addState">
+          <div class="label">State Name</div>
           <InputText
             v-model="form.name"
-            placeholder="Enter Country Title"
+            placeholder="Enter State Name"
             class="mt-2"
             required
           ></InputText>
-
-          <div class="row mt-4 gap-6">
-            <div class="col-md-6">
-              <div class="label">Country Short Code</div>
-
-              <InputText
-                v-model="form.shortName"
-                placeholder="Enter Country Short Name"
-                class="mt-2"
-                required
-              ></InputText>
-            </div>
-
-            <div class="col-md-6">
-              <div class="label">Country Code</div>
-
-              <InputText
-                v-model="form.phoneCode"
-                placeholder="Enter Country Code"
-                class="mt-2"
-                required
-              ></InputText>
-            </div>
-          </div>
 
           <hr class="mt-5" />
 
@@ -319,45 +259,21 @@ const filteredCountries = computed(() => {
               Reset
             </Button>
             <Button type="submit" :loading="adding" :disabled="!isFormValid">
-              Add Country
+              Add State
             </Button>
           </div>
         </form>
       </Modal>
 
-      <Modal v-model="editModal" heading="Edit Country">
+      <Modal v-model="editModal" heading="Edit State">
         <form @submit.prevent="editNow">
-          <div class="label">Country Name</div>
+          <div class="label">State Name</div>
           <InputText
-            v-model="selectedCountry.name"
-            placeholder="Enter Country Title"
+            v-model="selectedState.name"
+            placeholder="Enter State Name"
             class="mt-2"
             required
           ></InputText>
-
-          <div class="row mt-4 gap-6">
-            <div class="col-md-6">
-              <div class="label">Country Short Code</div>
-
-              <InputText
-                v-model="selectedCountry.shortName"
-                placeholder="Enter Country Short Name"
-                class="mt-2"
-                required
-              ></InputText>
-            </div>
-
-            <div class="col-md-6">
-              <div class="label">Country Code</div>
-
-              <InputText
-                v-model="selectedCountry.phoneCode"
-                placeholder="Enter Country Code"
-                class="mt-2"
-                required
-              ></InputText>
-            </div>
-          </div>
 
           <hr class="mt-5" />
 
@@ -376,7 +292,7 @@ const filteredCountries = computed(() => {
       <Modal v-model="deleteModal" heading="Are you sure?">
         <p>
           Are you sure you want to delete
-          <strong>{{ selectedCountry.name }}.</strong> This can not be undone.
+          <strong>{{ selectedState.name }}.</strong> This can not be undone.
         </p>
         <div class="mt-4 flex jc-end ai-center">
           <Button
@@ -414,5 +330,13 @@ const filteredCountries = computed(() => {
 
 .state-info {
   padding-top: 125px;
+}
+
+@media only screen and (max-width: 600px) {
+  .country-info,
+  .country-info a {
+    font-size: 12px;
+    line-height: 20px;
+  }
 }
 </style>

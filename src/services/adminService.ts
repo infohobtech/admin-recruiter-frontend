@@ -8,6 +8,11 @@ type CountryModel = {
   id?: number;
 };
 
+type StateModel = {
+  name: string;
+  id?: number;
+};
+
 export default {
   getUserInfo() {
     return axiosAdmin.get("/auth/user-info");
@@ -70,5 +75,19 @@ export default {
 
   deleteCountry(payload: number) {
     return axiosAdmin.delete("/country/" + payload);
+  },
+
+  getAllStates(countryId: string) {
+    return axiosAdmin.get(`country/${countryId}/state`);
+  },
+
+  addState(countryId: string, payload: StateModel) {
+    return axiosAdmin.post(`/country/${countryId}/state`, payload);
+  },
+  editState(payload: StateModel) {
+    return axiosAdmin.put(`/country/state/${payload.id}`, payload);
+  },
+  deleteState(payload: number) {
+    return axiosAdmin.delete(`/country/state/${payload}`);
   }
 };
